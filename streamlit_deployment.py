@@ -12,12 +12,21 @@ if ai_app == "Blog generator":
   st.header("blog generator")
   st.write("prompt to build images")
   topic = st.text_area("Topic", height=30)
+  if st.button("generate!"):
+      st.write("Here you go!")
 
 elif ai_app == "Image Generator":
   st.header("Image Generatorr")
   st.write("prompt to build images")
   prompt = st.text_area("Topic", height=30)
+  if st.button("generate!"):
+    st.write("Here you go!")
+
 elif ai_app == "Movie Recommender":
   st.header("Movie Recommender")
   st.write("Describe a movie that you'd like to see.")
+
   movie_description = st.text_area("Topic", height=30)
+  
+  if st.button("generate!"):
+    st.write("Here you go!")
