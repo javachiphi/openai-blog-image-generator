@@ -55,6 +55,7 @@ if ai_app == "Blog generator":
   topic = st.text_area("Topic", height=30)
   platform = st.text_input("Social Platform", "Instagram")
   if st.button("generate!"):
+    with st.spinner("Loading..."):
      st.write("Here you go!")
      response = generate_blog(topic, "Instagram")
      st.text_area("generated blog", value=response.choices[0].text, height=700)
@@ -66,12 +67,13 @@ elif ai_app == "Image Generator":
   num_of_images = st.slider("Number of images", 1, 3, 1)
 
   if st.button("generate!") and prompt != "":
-    st.write("Here you go!")
+     with st.spinner("Loading..."):
+        st.write("Here you go!")
 
-    response = generate_images(prompt, num_of_images)
+        response = generate_images(prompt, num_of_images)
 
-    for output in response.data:
-      st.image(output.url)
+        for output in response.data:
+          st.image(output.url)
 
 elif ai_app == "Movie Recommender":
   st.header("Movie Recommender")
@@ -79,5 +81,20 @@ elif ai_app == "Movie Recommender":
 
   movie_description = st.text_area("Topic", height=30)
 
-  if st.button("generate!"):
-    st.write("Here you go!")
+  if st.button("generate!") and movie_description != "":
+    with st.spinner("Loading..."):
+      st.write("Here you go!")
+      vector = client.embeddings.create(
+        model="text-embedding-ada-002",
+        input=movie_description
+      )
+
+      result_vector = vector.data[0].embedding
+
+      result = index.query(
+        vector=result_vector,
+        top_k=3,
+        include_metadata=True
+      )
+      for movie in result.matches:
+        st.write(movie.metadata["title"])
