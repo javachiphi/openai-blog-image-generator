@@ -30,6 +30,16 @@ def generate_blog(topic, platform):
     
     return response
 
+
+def generate_images(prompt, num_of_images):
+  response = client.images.generate(
+    prompt=prompt,
+    n=num_of_images,
+    size="512x512"
+  )
+
+  return response
+
 ## Streamlit: View 
 st.set_page_config(layout="wide")
 st.title("OpenAI API WebApp")
@@ -43,7 +53,7 @@ if ai_app == "Blog generator":
   st.header("blog generator")
   st.write("prompt to build images")
   topic = st.text_area("Topic", height=30)
-  platform = st.text_input("Platform", "Instagram")
+  platform = st.text_input("Social Platform", "Instagram")
   if st.button("generate!"):
      st.write("Here you go!")
      response = generate_blog(topic, "Instagram")
@@ -52,9 +62,16 @@ if ai_app == "Blog generator":
 elif ai_app == "Image Generator":
   st.header("Image Generatorr")
   st.write("prompt to build images")
-  prompt = st.text_area("Topic", height=30)
-  if st.button("generate!"):
+  prompt = st.text_area("Prompt", height=30)
+  num_of_images = st.slider("Number of images", 1, 3, 1)
+
+  if st.button("generate!") and prompt != "":
     st.write("Here you go!")
+
+    response = generate_images(prompt, num_of_images)
+
+    for output in response.data:
+      st.image(output.url)
 
 elif ai_app == "Movie Recommender":
   st.header("Movie Recommender")
