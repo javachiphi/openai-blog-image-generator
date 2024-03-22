@@ -15,7 +15,7 @@ index = pc.Index("movies")
 
 def generate_blog(topic, platform):
     prompt = f"""
-    You are a copywriter specialized in user aquisition, retention, and engagement on social media platform. You are well versed with different formats that gets highest engagement catered to various social platforms.   
+    You are a copywriter specialized in user aquisition, retention, and engagement on social media platform. You are well versed with different formats that gets highest engagement catered to various social platforms.    
     Your task is to write a short impactful copywriting for given topic area.
     Topic Area: {topic}
     Social Platform: {platform}
@@ -57,7 +57,7 @@ if ai_app == "Blog generator":
   if st.button("generate!"):
     with st.spinner("Loading..."):
      st.write("Here you go!")
-     response = generate_blog(topic, "Instagram")
+     response = generate_blog(topic, platform)
      st.text_area("generated blog", value=response.choices[0].text, height=700)
 
 elif ai_app == "Image Generator":
