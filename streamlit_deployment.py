@@ -7,7 +7,7 @@ import os
 import uuid 
 import streamlit as st
 
-from PyPDF2 import PdfReader
+#from PyPDF2 import PdfReader
 
 
 load_dotenv()
