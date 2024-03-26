@@ -1,3 +1,6 @@
+##Overview 
+Built a playground app to explore Open AI’s LLM functionalities to learn key AI concepts such as embeddings, memory, retrieval, vector database;
+
 ### Blog generator 
 Use blog with a copywriter GPT 
 
